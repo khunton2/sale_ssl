@@ -27,7 +27,8 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
 
@@ -47,89 +48,76 @@
                 <div class="sidebar-brand-text mx-3">SSL Manager </div>
             </a>
 
-             <!-- Divider -->
-             <hr class="sidebar-divider my-0">
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-<!-- Nav Item - Dashboard -->
-<li class="nav-item">
-    <a class="nav-link" href="manager_index.php">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
-</li>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="manager_index.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
 
-<!-- Divider -->
-<hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-<!-- Heading -->
-<div class="sidebar-heading">
-in-site
-</div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                in-site
+            </div>
 
-<!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="manager_port.php">
-        <i class="fa-solid fa-image-portrait"></i>
-        <span>port</span>
-    </a>
-</li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="manager_port.php">
+                    <i class="fa-solid fa-image-portrait"></i>
+                    <span>port</span>
+                </a>
+            </li>
 
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-        aria-expanded="true" aria-controls="collapsePages">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
 
-        <i class="fa-solid fa-circle-user"></i>
-        <span>Pages</span>
-    </a>
-    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">add data:</h6>
-            <a class="collapse-item" href="manager_add.php">addata</a>
-            <a class="collapse-item" href="Check_status.php">Check status</a>
-            <a class="collapse-item" href="manager_adduser.php">addseller</a>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">add data:</h6>
+                        <a class="collapse-item" href="manager_add.php">addata</a>
+                        <a class="collapse-item" href="Check_status.php">Check status</a>
+                        <a class="collapse-item" href="manager_adduser.php">addseller</a>
 
-        </div>
-    </div>
-</li>
-<div class="sidebar-heading">
-    off-site
-</div>
-
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
-        aria-expanded="true" aria-controls="collapsePages">
-
-        <i class="fa-solid fa-clock"></i>
-        <span>appointment</span>
-    </a>
-    <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">add time:</h6>
-            <a class="collapse-item" href="manager_Scheduling.php">appointment</a>
-        </div>
-    </div>
-</li>
-<li class="nav-item">
-    <a class="nav-link collapsed" href="manager_bill.php">
-        <i class="fa-solid fa-money-bills"></i>
-        <span>bill</span>
-    </a>
-</li>
+                    </div>
+                </div>
+            </li>
+            <div class="sidebar-heading">
+                off-site
+            </div>
 
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
+                    aria-expanded="true" aria-controls="collapsePages">
 
+                    <i class="fa-solid fa-clock"></i>
+                    <span>appointment</span>
+                </a>
+                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">add time:</h6>
+                        <a class="collapse-item" href="manager_Scheduling.php">appointment</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="manager_bill.php">
+                    <i class="fa-solid fa-money-bills"></i>
+                    <span>bill</span>
+                </a>
+            </li>
 
-<!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
-
-<!-- Sidebar Toggler (Sidebar) -->
-<div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-</div>
-
-</ul>
-<!-- End of Sidebar -->
 
 
 
@@ -140,6 +128,19 @@ in-site
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -206,10 +207,10 @@ in-site
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                Counter - Alerts 
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            
+
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -250,7 +251,7 @@ in-site
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
-                        </li> 
+                        </li>
                     -->
                         <!-- Nav Item - Messages -->
                         <!-- <li class="nav-item dropdown no-arrow mx-1">
@@ -368,9 +369,9 @@ in-site
                                 <div class="card-body">
                                     <form action="" method="POST" enctype="multipart/form-data">
 
-                                    <div class="mb-3 row">
-                                            <label for="inputstart"
-                                                class="col-sm-2 col-form-label">starting point</label>
+                                        <div class="mb-3 row">
+                                            <label for="inputstart" class="col-sm-2 col-form-label">starting
+                                                point</label>
                                             <div class="col-sm-10">
                                                 <input id="start" name="start" type="number" class="form-control"
                                                     placeholder="start" aria-label="Disabled input example" required>
@@ -381,31 +382,31 @@ in-site
                                             <label for="inputDestination"
                                                 class="col-sm-2 col-form-label">Destination</label>
                                             <div class="col-sm-10">
-                                                <input id="Destination" name="Destination" type="number" class="form-control"
-                                                    placeholder="Destination" aria-label="Disabled input example" required>
+                                                <input id="Destination" name="Destination" type="number"
+                                                    class="form-control" placeholder="Destination"
+                                                    aria-label="Disabled input example" required>
                                             </div>
                                         </div>
 
-                                       
+
 
                                         <div class="mb-3 row">
-                                            <label for="inputtotal"
-                                                class="col-sm-2 col-form-label">Total price</label>
+                                            <label for="inputtotal" class="col-sm-2 col-form-label">Total price</label>
                                             <div class="col-sm-10">
                                                 <input id="total" name="total" type="number" class="form-control"
-                                                    placeholder="Total price" aria-label="Disabled input example" required>
+                                                    placeholder="Total price" aria-label="Disabled input example"
+                                                    required>
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="mb-3 row">
-                                            <label for="inputNote"
-                                                class="col-sm-2 col-form-label">Note</label>
+                                            <label for="inputNote" class="col-sm-2 col-form-label">Note</label>
                                             <div class="col-sm-10">
                                                 <!-- <input id="question_number" name="question_number" class="form-control"
                                                     placeholder="รายละเอียด" aria-label="Disabled input example"> -->
-                                                    <textarea id="note" name="note" class="form-control" placeholder="Note"
+                                                <textarea id="note" name="note" class="form-control" placeholder="Note"
                                                     required> </textarea>
                                             </div>
                                         </div>
@@ -418,7 +419,25 @@ in-site
                                             </div>
                                         </div>
 
-                                        
+                                        <div class="mb-3 row">
+                                            <label for="inputimage" class="col-sm-2 col-form-label">addimage</label>
+                                            <div class="input-container col-sm-10">
+                                                <!-- Inputs will be appended here -->
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="btninput" class="col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                                <button class="btn btn-success" id="add-input">Add Input</button>
+                                            </div>
+                                        </div>
+
+
+
+
                                         <div class="mb-3 row">
                                             <label for="inputquestion" class="col-sm-2 col-form-label"></label>
                                             <div class="col-sm-10">
@@ -475,6 +494,30 @@ in-site
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        let inputCount = 0;
+
+        // Add input on button click
+        $("#add-input").click(function() {
+            inputCount++;
+            const inputHtml = `
+      <div class="input-group mt-2">
+        <input type="file" class="form-control" name="image-${inputCount}" placeholder="image ${inputCount}">
+        <button class="btn btn-danger" id="delete-input-${inputCount}">Delete</button>
+      </div>
+    `;
+            $(".input-container").append(inputHtml);
+
+            // Delete input on delete button click
+            $(`#delete-input-${inputCount}`).click(function() {
+                $(this).closest(".input-group").remove();
+            });
+        });
+    });
+    </script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -492,7 +535,9 @@ in-site
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 
 </body>
 

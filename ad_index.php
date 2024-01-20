@@ -30,6 +30,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 </head>
 
 <body id="page-top">
@@ -394,6 +396,72 @@
                         </div>
                     </div>
 
+                    <!-- -->
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                                    <h6 class="m-0 font-weight-bold text-primary">Summary of work sale</h6>
+
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                                    <h6 class="m-0 font-weight-bold text-primary">Summary of work manager</h6>
+
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart000"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                                    <h6 class="m-0 font-weight-bold text-primary">expenses</h6>
+                                </div>
+                                <div class="card-body" style=" height: 300px">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">name</th>
+                                                <th scope="col">Latest balance</th>
+                                                <th scope="col">Total cost</th>
+                                                <th></th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>manager1</td>
+                                                <td>1/12/2024</td>
+                                                <td>2000</td>
+                                                <td><a class="btn btn-secondary" href="#"><i class="fa-solid fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>manager2</td>
+                                                <td>1/20/2024</td>
+                                                <td>2000</td>
+                                                <td><a class="btn btn-secondary" href="#"><i class="fa-solid fa-eye"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
 
 
@@ -431,8 +499,8 @@
                                             require_once 'connectDB/connectDB.php';
                                             $stmt = $conn->prepare("SELECT tbl_listcompane.*, user_open.name AS open_name, user_off.name AS off_name
                                                                     FROM `tbl_listcompane`
-                                                                    JOIN tbl_user AS user_open ON tbl_listcompane.open = user_open.id
-                                                                    JOIN tbl_user AS user_off ON tbl_listcompane.off = user_off.id");
+                                                                    LEFT  JOIN tbl_user AS user_open ON tbl_listcompane.open = user_open.id
+                                                                    LEFT JOIN tbl_user AS user_off ON tbl_listcompane.off = user_off.id");
                                             $stmt->execute();
                                             $result = $stmt->fetchAll();
                                             foreach ($result as $k) {
@@ -578,7 +646,8 @@
                                             :</label>&nbsp&nbsp<?= $k['Coordinator_name'];?><br>
                                         <label style="color:black">เบอร์โทร :</label>&nbsp&nbsp<?= $k['phone'];?><br>
                                         <label style="color:black">อีเมล :</label>&nbsp&nbsp<?= $k['email'];?><br>
-                                        <label style="color:black">ราคากลาง :</label>&nbsp&nbsp<?= $k['avg_price'];?> บาท<br>
+                                        <label style="color:black">ราคากลาง :</label>&nbsp&nbsp<?= $k['avg_price'];?>
+                                        บาท<br>
                                         <label style="color:black">หมายเหตุ :</label>&nbsp&nbsp<?= $k['note'];?><br>
                                         <label style="color:black">คนเปิด :</label>&nbsp&nbsp<?= $k['open_name'];?><br>
                                         <label style="color:black">คนปิด :</label>&nbsp&nbsp<?= $k['off_name'];?><br>
@@ -632,6 +701,11 @@
 		}
 		?>
 
+
+    <script>
+
+    </script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -648,6 +722,16 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/demo/chart-sale.js"></script>
+    <script src="js/demo/chart-manager.js"></script>
 
 </body>
 
