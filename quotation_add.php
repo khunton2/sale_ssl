@@ -1,18 +1,14 @@
 <?php
 date_default_timezone_set('Asia/Bangkok');
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'ssl_seller');
         $mysqli->begin_transaction();
-
         $commodity = $_POST['commodity'];
         $volumn = $_POST['volumn'];
         $term = $_POST['term'];
         $weight = $_POST['weight'];
         $listcompane = $_POST["listcompane"];
-
-
         if (isset($_POST["pol"])) {
             // เพิ่มข้อมูลที่เกี่ยวข้องเพิ่มเติมลงในข้อความแจ้ง
             $quotation_number = date("YmdHis");
@@ -40,15 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
             }
             // Set fake data for quotation
-
             $sqlQuotation = "INSERT INTO tbl_quotation (commodity, volumn, term, weight, created_at, listcompane) VALUES (?, ?, ?, ?, NOW(), ?)";
             $stmtQuotation = $mysqli->prepare($sqlQuotation);
-
-
-
-
-
-
             if ($stmtQuotation) {
                 // Bind parameters and execute the statement for creating a quotation
                 $stmtQuotation->bind_param("ssssi", $commodity, $volumn, $term, $weight, $listcompane);
@@ -65,16 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $sqlHasSeaCustoms = "INSERT INTO tbl_has_sea_customs 
                 (customs_clearance, lcl, 20_inch, 40_inch, 40_inch_hc, quotation) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmtHasSeaCustoms = $mysqli->prepare($sqlHasSeaCustoms);
-
-
                 $variablesAdditionalCharges = ["service", "type", "currency", "des", "usd", "thb", "unit"];
                 $sqlAdditionalCharges = "INSERT INTO tbl_additional_charges (service, type, currentcy, des, usd, thb, unit, quotation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmtAdditionalCharges = $mysqli->prepare($sqlAdditionalCharges);
-
-
-
-
-
                 if ($stmtHasSea) {
                     // Bind parameters for inserting into tbl_has_sea
                     $stmtHasSea->bind_param("ssiiisssssi", $pol, $pod, $lcl, $twenty, $forty, $fortyhc, $tt, $via, $etd, $carrier, $quotationId);
@@ -121,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $usdArray = $_POST['usd'] ?? [];
                     $thbArray = $_POST['thb'] ?? [];
                     $unitArray = $_POST['unit'] ?? [];
-
                     $count = max(
                         count($serviceArray),
                         count($typeArray),
@@ -131,7 +112,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         count($thbArray),
                         count($unitArray)
                     );
-
                     for ($i = 0; $i < $count; $i++) {
                         // Check if array key exists for the current index
                         if (
@@ -163,13 +143,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "Skipping empty or undefined array key at index $i.";
                         }
                     }
-
                     // Close the statement for inserting into tbl_additional_charges
                     $stmtAdditionalCharges->close();
                 }
             }
             $mysqli->commit();
-            gen_mpdf($listcompane);
+            echo "<script>console.log('inside')</script>";
+            gen_mpdf($listcompane, $commodity, $volumn, $term, $weight,
+            $pols, $pods, $lcls, $twentys, $forties, $fortyhcs, $tts, $vias, $etds, $carriers);
             // header("Location: saler_port.php");
             // exit;
         } else {
@@ -193,14 +174,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $variablesHasTransport = ["cy", "loading", "return", "distance", "fourWeek", "sixWeek", "tenWeek", "twentyTrans", "fortyTrans"];
             $sqlHasTransport = "INSERT INTO tbl_has_transport (cy, loading, return_data, distance, 4_w, 6_w, 10_w, 20_inch, 40_inch, quotation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmtHasTransport = $mysqli->prepare($sqlHasTransport);
-
             $variablesAdditionalCharges = ["service", "type", "currency", "des", "usd", "thb", "unit"];
             $sqlAdditionalCharges = "INSERT INTO tbl_additional_charges (service, type, currentcy, des, usd, thb, unit, quotation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmtAdditionalCharges = $mysqli->prepare($sqlAdditionalCharges);
-
-
-
-
             if ($stmtHasTransport) {
                 // Iterate through the arrays and insert row by row
                 for ($i = 0; $i < count($_POST['cy']); $i++) {
@@ -209,19 +185,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             ${$variable} = $_POST[$variable][$i];
                         }
                     }
-
                     // Bind parameters and execute the statement for inserting into tbl_has_transport
                     $stmtHasTransport->bind_param("sssssssssi", $cy, $loading, $return, $distance, $fourWeek, $sixWeek, $tenWeek, $twentyTrans, $fortyTrans, $quotationId);
-
                     // Execute the statement for inserting into tbl_has_transport
                     $stmtHasTransport->execute();
                 }
-
                 // Close the statement for inserting into tbl_has_transport
                 $stmtHasTransport->close();
-
                 // If everything is successful, commit the transaction
-
             }
             if ($stmtAdditionalCharges) {
                 // Iterate through each index of the arrays and insert one row at a time
@@ -232,7 +203,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $usdArray = $_POST['usd'] ?? [];
                 $thbArray = $_POST['thb'] ?? [];
                 $unitArray = $_POST['unit'] ?? [];
-
                 $count = max(
                     count($serviceArray),
                     count($typeArray),
@@ -242,7 +212,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     count($thbArray),
                     count($unitArray)
                 );
-
                 for ($i = 0; $i < $count; $i++) {
                     // Check if array key exists for the current index
                     if (
@@ -274,15 +243,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "Skipping empty or undefined array key at index $i.";
                     }
                 }
-
                 // Close the statement for inserting into tbl_additional_charges
                 $stmtAdditionalCharges->close();
             }
             $mysqli->commit();
-            gen_mpdf($listcompane);
+            // gen_mpdf($listcompane, $commodity, $volumn, $term, $weight,$_POST["pod"]);
             // header("Location: saler_port.php");
             // exit;
-
         }
     } catch (\Throwable $e) {
         $mysqli->rollback();
@@ -290,16 +257,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $mysqli->close();
 }
-
-
-
 //----------------⚡⚡⚡⚡  G E N E R A T E ___ P D F ⚡⚡⚡⚡----------------//
-function gen_mpdf($listcompane)
+function gen_sea_table(){
+    $sea_table = "";
+foreach ($_POST["pol"] as $index => $pol) {
+    $pod = $_POST["pod"][$index];
+    $lcl = $_POST["lcl"][$index];
+    $twenty = $_POST["twenty"][$index];
+    $forty = $_POST["forty"][$index];
+    $fortyhc = $_POST["fortyhc"][$index];
+    $tt = $_POST["tt"][$index];
+    $via = $_POST["via"][$index];
+    $etd = $_POST["etd"][$index];
+    $carrier = $_POST["carrier"][$index];
+    $sea_table .= '<tr>';
+    $sea_table .= '<td>' . htmlspecialchars($pol) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($pod) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($lcl) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($twenty) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($forty) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($fortyhc) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($tt) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($via) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($etd) . '</td>';
+    $sea_table .= '<td>' . htmlspecialchars($carrier) . '</td>';
+    $sea_table .= '</tr>';
+}
+    return $sea_table;
+}
+function       gen_mpdf($listcompane, $commodity, $volumn, $term, $weight,
+$pols, $pods, $lcls, $twentys, $forties, $fortyhcs, $tts, $vias, $etds, $carriers)
 {
     require_once 'connectDB/connectDB.php';
     require_once 'vendor/autoload.php';
-
-
     $query =   "SELECT  Company_name,address,email,phone,open_time,id  
   FROM tbl_listcompane
   WHERE id = $listcompane";
@@ -307,16 +297,11 @@ function gen_mpdf($listcompane)
     $stmt->execute();
     $result = $stmt->fetch();
     extract($result);
-
-
-
     // Create instance of TCPDF
     $pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     define('THSarabun', TCPDF_FONTS::addTTFfont(dirname(__FILE__) . '\fonts\THSarabun.ttf', 'TrueTypeUnicode'));
     $logo_path = '/img/SSL_LOGO.png';
-
     $address_header = "1/9 Soi Supapong 1 , Srinakarin Road, Nhongbon, Prawet, Bkk 10250, Thailand\nTel: 662-330-9312, Fax: 662-330-9748 www.ssllogistics.co.th\nเลขประจำตัวผู้เสียภาษี 0-10555-001500-4";
-
     // set document information
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('Company Name');
@@ -337,21 +322,17 @@ function gen_mpdf($listcompane)
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
     // set auto page breaks
     $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
     // set image scale factor
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
     // Add a page
     $pdf->AddPage();
     // set JPEG quality
     $pdf->setJPEGQuality(75);
     // Set custom font
     $pdf->SetFont(THSarabun, '', 12);
-
     // HTML content for the table with separate CSS style block
     $html = '
     <head>
-    
         <style>
         .cus-sign {
             text-align:right;
@@ -400,14 +381,10 @@ function gen_mpdf($listcompane)
               .marginless{
                 margin:0px;
               }
-       
         </style>
     </head>
     <body>
- 
-
     <div> </div>
-
             <table>
                 <thead>
                     <tr>
@@ -442,31 +419,25 @@ function gen_mpdf($listcompane)
                     <!-- Additional rows for quotation details can be added here -->
                 </tbody>
             </table>
-
             <div>
             <br>
             We are pleased to submit the quotation for your consideration as per belows details:-
-
             </div>
-       
         <table class="w-75">
         <tr>
           <th class="text-right">Commodity</th>
-          <th></th>
+          <th> '.$commodity.'</th>
           <th class="text-right">Term</th>
-          <th></th>
+          <th>'.$term.'</th>
         </tr>
         <tr>
           <td class="text-right">Volume</td>
-          <td></td>
+          <td>'.$volumn.'</td>
           <td class="text-right">Weight</td>
-          <td></td>
+          <td>'.$weight.'</td>
         </tr>
- 
       </table>
-   
 <div>
-
 </div>
       <table class=" mt-1">
       <thead>
@@ -486,8 +457,9 @@ function gen_mpdf($listcompane)
               <th>Carrier</th>
           </tr>
       </thead>
-      <tbody>
-      </tbody>
+      <tbody>';
+$html .= gen_sea_table();
+      $html .= '</tbody>
   </table>
 <div></div>
    <table  class="">
@@ -542,10 +514,8 @@ function gen_mpdf($listcompane)
                                         </tr>
                                     </tbody>
                                 </table>
-
                            <br>
                                 <div>Additional Charges</div>
-     
                                 <table id="additionalTable" class="table table-bordered m-0 table-sm ">
                                 <thead>
                                     <tr>
@@ -564,22 +534,14 @@ function gen_mpdf($listcompane)
                                 <tbody>
                                 </tbody>
                             </table>
-
-                       
                             <div class="remark-title">
                             Remark:
                             <br>• 1 Tax : Above amount is excluded VAT 7%
                             <br>• 2 Payment : Credit 15 Days
                             <br>• 3 Insurance    : Above amount is excluded
                    </div>
-
-                         
-                
-
-
     </body>
     ';
-
     // Write HTML content to PDF
     $pdf->writeHTML($html, true, false, true, false, '');
         // Text on the left
@@ -608,10 +570,8 @@ function gen_mpdf($listcompane)
     $pdf->Cell($leftBlockWidth, 0, ' ', 0, 0, 'L');
     $pdf->Cell($leftBlockWidth, 0, 'Date:', 0, 0, 'L');
     $Output = $pdf->Output('', 'S');
-
     // Embed the PDF using an <iframe>
     echo '<iframe width="100%" height="100%" src="data:application/pdf;base64,' . base64_encode($Output) . '"></iframe>';
-
     // Close the PDF
     $pdf->Close();
 }
