@@ -326,11 +326,11 @@ function gen_mpdf($listcompane)
     $pdf->SetHeaderData(
         $logo_path,
         PDF_HEADER_LOGO_WIDTH,
-        "S S L Logistics Co., Ltd",
+        "SSL Logistics Co., Ltd",
         $address_header
     );
-    $pdf->setHeaderFont(array(THSarabun, '', 12));
-    $pdf->setFooterFont(array(THSarabun, '', 12));
+    $pdf->setHeaderFont(array(THSarabun, '', 10));
+    $pdf->setFooterFont(array(THSarabun, '', 10));
     // set margins
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
@@ -346,7 +346,7 @@ function gen_mpdf($listcompane)
     // set JPEG quality
     $pdf->setJPEGQuality(75);
     // Set custom font
-    $pdf->SetFont(THSarabun, '', 14);
+    $pdf->SetFont(THSarabun, '', 12);
 
     // HTML content for the table with separate CSS style block
     $html = '
@@ -566,13 +566,12 @@ function gen_mpdf($listcompane)
                             </table>
 
                        
-                            <div class="remark-title"><br>
+                            <div class="remark-title">
                             Remark:
                             <br>• 1 Tax : Above amount is excluded VAT 7%
                             <br>• 2 Payment : Credit 15 Days
                             <br>• 3 Insurance    : Above amount is excluded
-                   
-                          </div>
+                   </div>
 
                          
                 
@@ -585,30 +584,29 @@ function gen_mpdf($listcompane)
     $pdf->writeHTML($html, true, false, true, false, '');
         // Text on the left
     // Set fixed widths for the text blocks
-    $leftBlockWidth = 60; // Adjust as needed
-    $rightBlockWidth = 120; // Adjust as needed
-
-    // Line 1
-    $pdf->Cell($leftBlockWidth, 10, 'Quoted by:', 0, 0, 'L');
-    $pdf->Cell($rightBlockWidth, 10, 'Customer Acceptance:', 0, 1, 'R');
-
-    // Line 2
-    $pdf->Cell($leftBlockWidth, 25, '(Adam Smith)', 0, 0, 'L');
-    $pdf->Cell($rightBlockWidth-60, 10, 'Company Name:', 0, 1, 'R');
-
-    // Line 3
-    $pdf->Cell($leftBlockWidth, 15, 'Import & Export Executive', 0, 0, 'L');
-    $pdf->Cell($rightBlockWidth, 10, 'Authorized Signature:', 0, 1, 'R');
-
-    // Line 4
-    $pdf->Cell($leftBlockWidth, 10, '', 0, 0, 'L'); // Empty line
-    $pdf->Cell($rightBlockWidth, 0, '(..................................................................)', 0, 1, 'R');
-
-
-    // Text on the right
-    // Output the PDF as a string
-
-
+    $leftBlockWidth = 80; // Adjust as needed
+    $rightBlockWidth = 70; // Adjust as needed
+    $pdf->Cell($leftBlockWidth, 0, 'Quoted by:', 0, 0, 'L');
+    $pdf->Cell($rightBlockWidth, 0, 'Customer Acceptance:', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, '', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'By signing and returning the quotation, you confirm.123', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, '', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'your order to acquire the listed of services in accordance', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, '(Jesada Taveesupapong)', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'with the provisions of this quotation and the applicable terms', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Import & Export Executive', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, '', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Tel.662-330-9312-13', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Company Name:', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Fax.662-330-9748', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Authorized Signature:', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Moblie: 081-8336011', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, ' ', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, '(............................................................................)', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, ' ', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Title', 0, 1, 'L');
+    $pdf->Cell($leftBlockWidth, 0, ' ', 0, 0, 'L');
+    $pdf->Cell($leftBlockWidth, 0, 'Date:', 0, 0, 'L');
     $Output = $pdf->Output('', 'S');
 
     // Embed the PDF using an <iframe>
